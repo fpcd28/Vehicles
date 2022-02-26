@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Vehicles.API.Data.Entities
@@ -12,5 +13,6 @@ namespace Vehicles.API.Data.Entities
         [Required(ErrorMessage = "El Campo {0} es obligatorio.")]
         public String Description { get; set; }
 
+        public ICollection<Vehicle> Vehicles { get;set; }
     }
 }

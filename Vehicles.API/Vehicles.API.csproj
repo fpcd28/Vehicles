@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Vehicles.Common\Vehicles.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\ate\" />
+  </ItemGroup>
+
 </Project>
