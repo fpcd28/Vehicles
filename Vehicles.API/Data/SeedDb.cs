@@ -26,10 +26,16 @@ namespace Vehicles.API.Data
             await CheckDocumentTypesAsync();
             await CheckProceduresAsync();
             await CheckRolesAsync();
-            await CheckUserAsync("1010", "Freddy ","Carhuachin Diaz","fpcd28@gmail.com","996152516","Smp",UserType.Admin);
+            await CheckUserAsync("1010", "Freddy","Carhuachin","fpcd28@gmail.com","996152516","Smp",UserType.Admin);
             await CheckUserAsync("2020", "Juan", "Salazar", "fpcd@hotmail.com", "996152516", "Smp", UserType.User);
             await CheckUserAsync("3030", "Percy", "Bedoya", "fpcd@gmail.com", "996152516", "Smp", UserType.User);
          }
+
+        private async Task CheckRolesAsync()
+        {
+            await _userHelper.CheckRoleAsync(UserType.Admin.ToString());
+            await _userHelper.CheckRoleAsync(UserType.User.ToString());
+        }
 
         private async Task CheckUserAsync(string document, string firsName, string lastName, string email, string phoneNumber, string address, UserType userType)
         {
@@ -40,7 +46,7 @@ namespace Vehicles.API.Data
                 {
                     Address = address,
                     Document = document,
-                    DocumentType = _context.DocumentTypes.FirstOrDefault(x => x.Description == "Cédula"),
+                    DocumentType = _context.DocumentTypes.FirstOrDefault(x => x.Description == "Cedula"),
                     Email = email,
                     FirtName = firsName,
                     LastName = lastName,
@@ -53,11 +59,7 @@ namespace Vehicles.API.Data
             }
         }
 
-        private async Task CheckRolesAsync()
-        {
-            await _userHelper.CheckRoleAsync(UserType.Admin.ToString());
-            await _userHelper.CheckRoleAsync(UserType.User.ToString());
-        }
+       
 
         private async Task CheckProceduresAsync()
         {
@@ -81,7 +83,7 @@ namespace Vehicles.API.Data
             if (!_context.DocumentTypes.Any())
             {
                 _context.DocumentTypes.Add(new DocumentType { Description = "Cedula" });
-                _context.DocumentTypes.Add(new DocumentType { Description = "DNI" });
+                _context.DocumentTypes.Add(new DocumentType { Description = "DNI"});
                 _context.DocumentTypes.Add(new DocumentType { Description = "NIT" });
                 _context.DocumentTypes.Add(new DocumentType { Description = "Pasaporte" });
                 await _context.SaveChangesAsync();
